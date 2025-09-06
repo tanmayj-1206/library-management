@@ -26,7 +26,7 @@ public class UserAuthService implements UserDetailsService {
         System.out.println("User: " + user);
         return User.builder()
                 .username(user.getUsername())
-                .password("{noop}" + user.getPassword())
+                .password(user.getPassword())
                 .authorities(List.of(new SimpleGrantedAuthority(user.getRole())))
                 .build();
     }
