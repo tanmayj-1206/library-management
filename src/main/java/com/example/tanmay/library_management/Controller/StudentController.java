@@ -3,18 +3,22 @@ package com.example.tanmay.library_management.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.tanmay.library_management.Model.Student;
+import com.example.tanmay.library_management.Model.UserModel;
 import com.example.tanmay.library_management.Service.StudentService;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 
-@RestController("students")
+@RestController
+@RequestMapping("students")
 public class StudentController {
 
     @Autowired
@@ -26,7 +30,7 @@ public class StudentController {
     }
 
     @PostMapping("/addstudent")
-    public String addStudent(@RequestBody Student student) {
+    public String addStudent(@RequestBody UserModel student) {
         studentService.addStudent(student);
         return "Student added successfully";
     }
