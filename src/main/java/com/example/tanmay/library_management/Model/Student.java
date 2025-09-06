@@ -6,7 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,16 +16,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "books")
-public class Book {
-
+@Table(name = "students")
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String title;
-    private String author;
-    private Boolean isAvailable = true;
+    
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserModel user;
 
-    @OneToMany(mappedBy = "bookId")
+    @OneToMany(mappedBy = "studentId")
     private List<BooksIssued> booksIssued;
 }

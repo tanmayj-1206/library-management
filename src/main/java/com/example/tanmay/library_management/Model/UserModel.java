@@ -1,29 +1,32 @@
 package com.example.tanmay.library_management.Model;
 
-import java.util.List;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name = "books")
-public class Book {
-
+@Table(
+    name = "users",
+    uniqueConstraints = @UniqueConstraint(columnNames = { "username" })
+)
+public class UserModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String title;
-    private String author;
-    private Boolean isAvailable = true;
 
-    @OneToMany(mappedBy = "bookId")
-    private List<BooksIssued> booksIssued;
+    private String name;
+    private String username;
+    private String password;
+    private String role;
+
+    @OneToOne(mappedBy = "user")
+    private Student student;
 }
