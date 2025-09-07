@@ -27,6 +27,4 @@ public class UserModel {
     private String password;
     private String role;
 
-    @OneToOne(mappedBy = "user")
-    private Student student;
 }
