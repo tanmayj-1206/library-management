@@ -8,12 +8,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-
 import com.example.tanmay.library_management.Model.UserModel;
 import com.example.tanmay.library_management.Repo.UserRepo;
 
-@Service
 public class UserAuthService implements UserDetailsService {
     @Autowired
     private UserRepo repo;
