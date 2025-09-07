@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -27,6 +28,6 @@ public class Student {
     @JoinColumn(name = "user_id")
     private UserModel user;
 
-    @OneToMany(mappedBy = "studentId")
+    @OneToMany(mappedBy = "studentId", fetch = FetchType.LAZY)
     private List<BooksIssued> booksIssued;
 }

@@ -2,7 +2,6 @@ package com.example.tanmay.library_management.Config;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -32,7 +31,12 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
             .csrf(customizer->customizer.disable())
-            .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/user/**").hasAuthority("ADMIN")
+                .requestMatchers("/students/**").hasAuthority("ADMIN")
+                .requestMatchers("/books/**").hasAuthority("ADMIN")
+                .anyRequest().authenticated()
+            )
             .httpBasic(withDefaults());
 
         return http.build();

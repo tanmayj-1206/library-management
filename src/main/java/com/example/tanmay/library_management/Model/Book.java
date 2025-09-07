@@ -3,6 +3,7 @@ package com.example.tanmay.library_management.Model;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,6 +25,6 @@ public class Book {
     private String author;
     private Boolean isAvailable = true;
 
-    @OneToMany(mappedBy = "bookId")
+    @OneToMany(mappedBy = "bookId", fetch = FetchType.LAZY)
     private List<BooksIssued> booksIssued;
 }
