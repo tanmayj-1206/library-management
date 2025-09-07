@@ -23,11 +23,11 @@ public class BooksIssued {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    private Student studentId;
+    private Student student;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
-    private Book bookId;
+    private Book book;
 
     private Date issueDate;
     private Date returnDate;

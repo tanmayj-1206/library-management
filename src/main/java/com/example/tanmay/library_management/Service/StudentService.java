@@ -3,14 +3,12 @@ package com.example.tanmay.library_management.Service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.tanmay.library_management.Model.Student;
 import com.example.tanmay.library_management.Model.UserModel;
 import com.example.tanmay.library_management.Repo.StudentRepository;
-import com.example.tanmay.library_management.Repo.UserRepo;
 
 @Service
 public class StudentService {

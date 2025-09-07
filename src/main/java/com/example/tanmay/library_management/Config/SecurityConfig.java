@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .requestMatchers("/user/**").hasAuthority("ADMIN")
                 .requestMatchers("/students/**").hasAuthority("ADMIN")
                 .requestMatchers("/books/**").hasAuthority("ADMIN")
+                .requestMatchers("/issue/**").hasAuthority("STUDENT")
                 .anyRequest().authenticated()
             )
             .httpBasic(withDefaults());

@@ -28,6 +28,6 @@ public class Student {
     @JoinColumn(name = "user_id")
     private UserModel user;
 
-    @OneToMany(mappedBy = "studentId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private List<BooksIssued> booksIssued;
 }

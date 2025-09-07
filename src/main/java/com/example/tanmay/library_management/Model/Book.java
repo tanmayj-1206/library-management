@@ -25,6 +25,6 @@ public class Book {
     private String author;
     private Boolean isAvailable = true;
 
-    @OneToMany(mappedBy = "bookId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
     private List<BooksIssued> booksIssued;
 }

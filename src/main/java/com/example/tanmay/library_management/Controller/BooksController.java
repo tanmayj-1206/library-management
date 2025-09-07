@@ -21,13 +21,11 @@ public class BooksController {
 
     @GetMapping("getbooks")
     public List<Book> getAllBooks() {
-        System.out.println("Fetching all books");
         return bookService.getAllBooks();
     }
 
     @PostMapping("addbooks")
     public Book addBook(@RequestBody Book book) {
-        System.out.println("Adding new book: " + book.getTitle());
         return bookService.addBook(book);
     }
 }
