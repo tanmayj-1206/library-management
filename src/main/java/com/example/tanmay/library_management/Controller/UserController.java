@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.tanmay.library_management.DTO.UserDTO;
 import com.example.tanmay.library_management.Model.UserModel;
 import com.example.tanmay.library_management.Service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("getusers")
-    public List<UserModel> getUsers() {
+    public List<UserDTO> getUsers() {
         return userService.getUsers();
     }
 

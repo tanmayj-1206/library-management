@@ -2,15 +2,12 @@ package com.example.tanmay.library_management.Utility;
 
 import com.example.tanmay.library_management.DTO.BooksDTO;
 import com.example.tanmay.library_management.DTO.StudentDTO;
+import com.example.tanmay.library_management.DTO.UserDTO;
 import com.example.tanmay.library_management.Model.Book;
 import com.example.tanmay.library_management.Model.Student;
+import com.example.tanmay.library_management.Model.UserModel;
 
 public class MapperDTOUtil {
-    public static <T, U> U map(T source, Class<U> destinationClass) throws Exception {
-        U destination = destinationClass.getDeclaredConstructor().newInstance();
-        org.springframework.beans.BeanUtils.copyProperties(source, destination);
-        return destination;
-    }
 
     public static StudentDTO toStudentDTO(Student student) {
         StudentDTO studentDTO = new StudentDTO();
@@ -54,5 +51,16 @@ public class MapperDTOUtil {
             });
 
         return booksDTO;
+    }
+
+    public static UserDTO toUserDTO(UserModel user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setName(user.getName());
+        userDTO.setRole(user.getRole());
+        userDTO.setStudent(user.getStudent() != null);
+        userDTO.setUsername(user.getUsername());
+        userDTO.setStudentId( user.getStudent() != null ? user.getStudent().getId() : 0);
+        return userDTO;
     }
 }

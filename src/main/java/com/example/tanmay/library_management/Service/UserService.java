@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.example.tanmay.library_management.DTO.UserDTO;
 import com.example.tanmay.library_management.Model.UserModel;
 import com.example.tanmay.library_management.Repo.UserRepo;
+import com.example.tanmay.library_management.Utility.MapperDTOUtil;
 
 @Service
 public class UserService {
@@ -16,8 +18,10 @@ public class UserService {
     private UserRepo repo;
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
-    public List<UserModel> getUsers() {
-        return repo.findAll();
+    public List<UserDTO> getUsers() {
+        return repo.findAll().stream()
+            .map(MapperDTOUtil::toUserDTO)
+            .toList();
     }
 
     public void addUser(UserModel user) {
