@@ -22,7 +22,7 @@ public class BookService {
             .toList();
     }
 
-    public Book addBook(Book book) {
-        return bookRepository.save(book);
+    public void addBook(Book book) {
+        bookRepository.save(book);
     }
 }

@@ -35,7 +35,7 @@ public class IssueBooksService {
         BooksIssued booksIssued = new BooksIssued();
         Book book = bookRepo.findById(Integer.parseInt(bookId)).get();
         if(!book.getIsAvailable()) {
-            return "Book is not available";
+            throw new RuntimeException("Book is not available");
         }
         booksIssued.setBook(book);
         booksIssued.setStudent(student);
@@ -52,7 +52,7 @@ public class IssueBooksService {
         Book book = bookRepo.findById(Integer.parseInt(bookId)).get();
         BooksIssued booksIssued = booksIssuedRepo.findByBookAndStudentAndIsReturnedFalse(book, student);
         if(booksIssued == null) {
-            return "No record found for this book and student";
+            throw new RuntimeException("No record found for this book and student");
         }
         booksIssued.setReturnDate(new Date(System.currentTimeMillis()));
         booksIssued.setIsReturned(true);
@@ -62,7 +62,7 @@ public class IssueBooksService {
         return "Book returned successfully";
     }
 
-    public List<IssuedBooksDTO> getIssuedBooksByStudentId() {
+    public List<IssuedBooksDTO> getIssuedBooks() {
         return booksIssuedRepo.findAll().stream()
             .map(MapperDTOUtil::toIssuedBooksDTO)
             .toList();
