@@ -1,9 +1,11 @@
 package com.tanmay.library_management.Utility;
 
 import com.tanmay.library_management.DTO.BooksDTO;
+import com.tanmay.library_management.DTO.IssuedBooksDTO;
 import com.tanmay.library_management.DTO.StudentDTO;
 import com.tanmay.library_management.DTO.UserDTO;
 import com.tanmay.library_management.Model.Book;
+import com.tanmay.library_management.Model.BooksIssued;
 import com.tanmay.library_management.Model.Student;
 import com.tanmay.library_management.Model.UserModel;
 
@@ -62,5 +64,18 @@ public class MapperDTOUtil {
         userDTO.setUsername(user.getUsername());
         userDTO.setStudentId( user.getStudent() != null ? user.getStudent().getId() : 0);
         return userDTO;
+    }
+
+    public static IssuedBooksDTO toIssuedBooksDTO(BooksIssued booksIssued) {
+        IssuedBooksDTO issuedBooksDTO = new IssuedBooksDTO();
+        issuedBooksDTO.setId(booksIssued.getId());
+        issuedBooksDTO.setBookId(booksIssued.getBook().getId());
+        issuedBooksDTO.setBookTitle(booksIssued.getBook().getTitle());
+        issuedBooksDTO.setStudentId(booksIssued.getStudent().getId());
+        issuedBooksDTO.setStudentName(booksIssued.getStudent().getUser().getName());
+        issuedBooksDTO.setIssueDate(booksIssued.getIssueDate());
+        issuedBooksDTO.setReturnDate(booksIssued.getReturnDate());
+        issuedBooksDTO.setIsReturned(booksIssued.getIsReturned());
+        return issuedBooksDTO;
     }
 }

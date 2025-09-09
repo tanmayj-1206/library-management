@@ -1,18 +1,21 @@
 package com.tanmay.library_management.Service;
 
 import java.sql.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.tanmay.library_management.DTO.IssuedBooksDTO;
 import com.tanmay.library_management.Model.Book;
 import com.tanmay.library_management.Model.BooksIssued;
 import com.tanmay.library_management.Model.Student;
 import com.tanmay.library_management.Repo.BookRepository;
 import com.tanmay.library_management.Repo.BooksIssuedRepo;
 import com.tanmay.library_management.Repo.StudentRepository;
+import com.tanmay.library_management.Utility.MapperDTOUtil;
 
 @Service
 public class IssueBooksService {
@@ -57,6 +60,12 @@ public class IssueBooksService {
         bookRepo.save(book);
         booksIssuedRepo.save(booksIssued);
         return "Book returned successfully";
+    }
+
+    public List<IssuedBooksDTO> getIssuedBooksByStudentId() {
+        return booksIssuedRepo.findAll().stream()
+            .map(MapperDTOUtil::toIssuedBooksDTO)
+            .toList();
     }
 
 }
