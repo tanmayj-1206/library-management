@@ -28,7 +28,7 @@ public class SecurityConfig {
         http
             .csrf(customizer->customizer.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/user/login").permitAll()
+                .requestMatchers("/login").permitAll()
                 .requestMatchers("/user/**", "/students/**", "/books/**").hasAuthority("ADMIN")
                 .requestMatchers("/issue/**").hasAuthority("STUDENT")
                 .anyRequest().authenticated()

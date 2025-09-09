@@ -29,17 +29,20 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
+        String jwt = null;
+        UserDetails userDetails = null;
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String jwt = authHeader.substring(7);
-            UserDetails userDetails = userAuthService.loadUserByUsername(jwtUtil.extractUsername(jwt));
-            if (jwtUtil.validateToken(jwt, userDetails)) {
-                List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority(jwtUtil.extractRole(jwt)));
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                    userDetails, null, authorities);
-                SecurityContextHolder.getContext().setAuthentication(authToken);
-            }
+            jwt = authHeader.substring(7);
+            String username = jwtUtil.extractUsername(jwt);
+            userDetails = userAuthService.loadUserByUsername(username);
+        }
+        if(jwt != null && userDetails != null && jwtUtil.validateToken(jwt, userDetails)) {
+            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                userDetails.getUsername(), null, List.of(new SimpleGrantedAuthority(userDetails.getAuthorities().iterator().next().getAuthority()))
+            );
+            SecurityContextHolder.getContext().setAuthentication(authToken);
         }
         filterChain.doFilter(request, response);
     }
-
+    
 }
