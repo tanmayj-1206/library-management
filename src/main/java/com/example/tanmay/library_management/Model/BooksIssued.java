@@ -2,6 +2,7 @@ package com.example.tanmay.library_management.Model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,10 +24,12 @@ public class BooksIssued {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
+    @JsonBackReference(value = "student-issued")
     private Student student;
 
     @ManyToOne
     @JoinColumn(name = "book_id")
+    @JsonBackReference(value = "book-issued")
     private Book book;
 
     private Date issueDate;

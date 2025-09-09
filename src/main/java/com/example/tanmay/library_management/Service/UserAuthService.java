@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import com.example.tanmay.library_management.Model.UserModel;
 import com.example.tanmay.library_management.Repo.UserRepo;
-
 @Component
 public class UserAuthService implements UserDetailsService {
     @Autowired
@@ -21,9 +20,7 @@ public class UserAuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("Username: " + username);
         user = repo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found : 404"));
-        System.out.println("User: " + user);
         return User.builder()
                 .username(user.getUsername())
                 .password(user.getPassword())

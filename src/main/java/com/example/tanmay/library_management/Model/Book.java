@@ -2,8 +2,9 @@ package com.example.tanmay.library_management.Model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,6 +26,7 @@ public class Book {
     private String author;
     private Boolean isAvailable = true;
 
-    @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "book")
+    @JsonManagedReference(value = "book-issued")
     private List<BooksIssued> booksIssued;
 }

@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.tanmay.library_management.Config.JwtUtil;
 import com.example.tanmay.library_management.Model.UserModel;
 import com.example.tanmay.library_management.Service.UserAuthService;
+import com.example.tanmay.library_management.Utility.JwtUtil;
 
 @RestController
 public class UsersLoginController {

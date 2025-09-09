@@ -2,7 +2,7 @@ package com.example.tanmay.library_management.Controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.tanmay.library_management.Model.Student;
+import com.example.tanmay.library_management.DTO.StudentDTO;
 import com.example.tanmay.library_management.Model.UserModel;
 import com.example.tanmay.library_management.Service.StudentService;
 
@@ -24,7 +24,7 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/getstudents")
-    public List<Student> getStudents() {
+    public List<StudentDTO> getStudents() {
         return studentService.getAllStudents();
     }
 
