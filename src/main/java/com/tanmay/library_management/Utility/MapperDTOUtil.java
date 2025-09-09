@@ -41,7 +41,7 @@ public class MapperDTOUtil {
         booksDTO.setId(book.getId());
         booksDTO.setTitle(book.getTitle());
         booksDTO.setAuthor(book.getAuthor());
-        booksDTO.setIsAvailable(book.getIsAvailable());
+        booksDTO.setAvailableCopies(book.getAvailableCopies());
         book.getBooksIssued().stream()
             .filter(issuedBook -> !issuedBook.getIsReturned())
             .findFirst()

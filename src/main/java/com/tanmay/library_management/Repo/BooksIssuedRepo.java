@@ -10,6 +10,6 @@ import com.tanmay.library_management.Model.Student;
 @Repository
 public interface BooksIssuedRepo extends JpaRepository<BooksIssued, Integer> {
 
-    BooksIssued findByBookAndStudentAndIsReturnedFalse(Book book, Student student);
+    BooksIssued findFirstByBookAndStudentAndIsReturnedFalse(Book book, Student student);
 
 }

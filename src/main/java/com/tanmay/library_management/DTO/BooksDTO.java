@@ -9,7 +9,7 @@ public class BooksDTO {
     private int id;
     private String title;
     private String author;
-    private Boolean isAvailable;
+    private int availableCopies;
     private IssuedTo issuedTo;
 
     @Data

@@ -16,7 +16,7 @@ import com.tanmay.library_management.Model.Book;
 import com.tanmay.library_management.Service.BookService;
 
 @RestController
-@RequestMapping("books")
+@RequestMapping("api/books")
 public class BooksController {
 
     @Autowired

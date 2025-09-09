@@ -24,7 +24,7 @@ public class Book {
     private int id;
     private String title;
     private String author;
-    private Boolean isAvailable = true;
+    private int availableCopies;
 
     @OneToMany(mappedBy = "book")
     @JsonManagedReference(value = "book-issued")

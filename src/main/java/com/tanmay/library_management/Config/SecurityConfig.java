@@ -28,9 +28,9 @@ public class SecurityConfig {
         http
             .csrf(customizer->customizer.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/login").permitAll()
-                .requestMatchers("/user/**", "/students/**", "/books/**").hasAuthority("ADMIN")
-                .requestMatchers("/issue/issuebook", "/issue/returnbook").hasAuthority("STUDENT")
+                .requestMatchers("/api/login").permitAll()
+                .requestMatchers("/api/user/**", "/api/students/**", "/api/books/**").hasAuthority("ADMIN")
+                .requestMatchers("/api/issue/issuebook", "/api/issue/returnbook").hasAuthority("STUDENT")
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

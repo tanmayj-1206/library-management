@@ -34,13 +34,13 @@ public class IssueBooksService {
         Student student = studentRepo.findByUserUsername(authentication.getName()).get();
         BooksIssued booksIssued = new BooksIssued();
         Book book = bookRepo.findById(Integer.parseInt(bookId)).get();
-        if(!book.getIsAvailable()) {
+        if(book.getAvailableCopies() <= 0) {
             throw new RuntimeException("Book is not available");
         }
         booksIssued.setBook(book);
         booksIssued.setStudent(student);
         booksIssued.setIssueDate(new Date(System.currentTimeMillis()));
-        book.setIsAvailable(false);
+        book.setAvailableCopies(book.getAvailableCopies() - 1);
         bookRepo.save(book);
         booksIssuedRepo.save(booksIssued);
         return "Book issued successfully";
@@ -50,13 +50,13 @@ public class IssueBooksService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Student student = studentRepo.findByUserUsername(authentication.getName()).get();
         Book book = bookRepo.findById(Integer.parseInt(bookId)).get();
-        BooksIssued booksIssued = booksIssuedRepo.findByBookAndStudentAndIsReturnedFalse(book, student);
+        BooksIssued booksIssued = booksIssuedRepo.findFirstByBookAndStudentAndIsReturnedFalse(book, student);
         if(booksIssued == null) {
             throw new RuntimeException("No record found for this book and student");
         }
         booksIssued.setReturnDate(new Date(System.currentTimeMillis()));
         booksIssued.setIsReturned(true);
-        book.setIsAvailable(true);
+        book.setAvailableCopies(book.getAvailableCopies() + 1);
         bookRepo.save(book);
         booksIssuedRepo.save(booksIssued);
         return "Book returned successfully";

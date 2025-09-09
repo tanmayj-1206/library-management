@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
-@RequestMapping("issue")
+@RequestMapping("api/issue")
 public class IssueBooksController {
 
     @Autowired
