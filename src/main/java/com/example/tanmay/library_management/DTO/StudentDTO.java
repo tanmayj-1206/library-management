@@ -9,15 +9,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentDTO {
 
-    public StudentDTO(int id, String name, int noOfBooksIssued, List<String> bookTitles) {
-        this.id = id;
-        this.name = name;
-        this.noOfBooksIssued = noOfBooksIssued;
-        this.bookTitles = bookTitles;
-    }
-
     private int id;
     private String name;
     private int noOfBooksIssued;
-    private List<String> bookTitles;
+    private List<IssuedBooks> booksIssued;
+
+    @Data
+    @NoArgsConstructor
+    public static class IssuedBooks {
+        private int bookId;
+        private String bookTitle;
+    }
 }

@@ -20,12 +20,18 @@ public class MapperDTOUtil {
                                         .toList()
                                         .size()
                                     );
-        studentDTO.setBookTitles(student.getBooksIssued()
-                                    .stream()
-                                    .filter(book -> !book.getIsReturned())
-                                    .map(book -> book.getBook().getTitle())
-                                    .toList()
-                                );
+        studentDTO.setBooksIssued(
+            student.getBooksIssued()
+                .stream()
+                .filter(book -> !book.getIsReturned())
+                .map(book -> {
+                    StudentDTO.IssuedBooks issuedBook = new StudentDTO.IssuedBooks();
+                    issuedBook.setBookId(book.getBook().getId());
+                    issuedBook.setBookTitle(book.getBook().getTitle());
+                    return issuedBook;
+                })
+                .toList()
+        );
         return studentDTO;
     }
 }
