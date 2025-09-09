@@ -1,6 +1,8 @@
 package com.example.tanmay.library_management.Utility;
 
+import com.example.tanmay.library_management.DTO.BooksDTO;
 import com.example.tanmay.library_management.DTO.StudentDTO;
+import com.example.tanmay.library_management.Model.Book;
 import com.example.tanmay.library_management.Model.Student;
 
 public class MapperDTOUtil {
@@ -33,5 +35,24 @@ public class MapperDTOUtil {
                 .toList()
         );
         return studentDTO;
+    }
+
+    public static BooksDTO toBooksDTO(Book book) {
+        BooksDTO booksDTO = new BooksDTO();
+        booksDTO.setId(book.getId());
+        booksDTO.setTitle(book.getTitle());
+        booksDTO.setAuthor(book.getAuthor());
+        booksDTO.setIsAvailable(book.getIsAvailable());
+        book.getBooksIssued().stream()
+            .filter(issuedBook -> !issuedBook.getIsReturned())
+            .findFirst()
+            .ifPresent(issuedBook -> {
+                BooksDTO.IssuedTo issuedTo = new BooksDTO.IssuedTo();
+                issuedTo.setStudentId(issuedBook.getStudent().getId());
+                issuedTo.setStudentName(issuedBook.getStudent().getUser().getName());
+                booksDTO.setIssuedTo(issuedTo);
+            });
+
+        return booksDTO;
     }
 }

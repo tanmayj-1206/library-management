@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.tanmay.library_management.DTO.BooksDTO;
 import com.example.tanmay.library_management.Model.Book;
 import com.example.tanmay.library_management.Service.BookService;
 
@@ -20,7 +21,7 @@ public class BooksController {
     private BookService bookService;
 
     @GetMapping("getbooks")
-    public List<Book> getAllBooks() {
+    public List<BooksDTO> getAllBooks() {
         return bookService.getAllBooks();
     }
 
