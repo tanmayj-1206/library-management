@@ -22,8 +22,6 @@ public class UsersLoginController {
     @Autowired
     private UserAuthService userAuthService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
     
     @PostMapping("login")
     public String login(@RequestBody UserModel user) {
@@ -37,7 +35,7 @@ public class UsersLoginController {
             return "Login Failed";
         }
         UserDetails loggedInUser = userAuthService.loadUserByUsername(user.getUsername());
-        String token = jwtUtil.generateToken(loggedInUser);
+        String token = JwtUtil.generateToken(loggedInUser);
         return token;
     }
 }
