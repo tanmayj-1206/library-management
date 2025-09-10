@@ -19,7 +19,8 @@ import com.tanmay.library_management.Utility.MapperDTOUtil;
 
 @Service
 public class IssueBooksService {
-    
+    int BORROW_TIME = 1000 * 60 * 60 * 24 * 14;
+    int FINE_PER_DAY = 10; 
     @Autowired
     private StudentRepository studentRepo;
 
@@ -40,6 +41,7 @@ public class IssueBooksService {
         booksIssued.setBook(book);
         booksIssued.setStudent(student);
         booksIssued.setIssueDate(new Date(System.currentTimeMillis()));
+        booksIssued.setDueDate(new Date(System.currentTimeMillis() + BORROW_TIME));
         book.setAvailableCopies(book.getAvailableCopies() - 1);
         bookRepo.save(book);
         booksIssuedRepo.save(booksIssued);
@@ -56,6 +58,10 @@ public class IssueBooksService {
         }
         booksIssued.setReturnDate(new Date(System.currentTimeMillis()));
         booksIssued.setIsReturned(true);
+        booksIssued.setFine((int) ((booksIssued.getReturnDate().getTime() - booksIssued.getDueDate().getTime()) / (1000 * 60 * 60 * 24)) * FINE_PER_DAY);
+        if(booksIssued.getFine() < 0) {
+            booksIssued.setFine(0);
+        }
         book.setAvailableCopies(book.getAvailableCopies() + 1);
         bookRepo.save(book);
         booksIssuedRepo.save(booksIssued);

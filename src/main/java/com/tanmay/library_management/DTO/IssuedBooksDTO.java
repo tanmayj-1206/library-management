@@ -16,4 +16,6 @@ public class IssuedBooksDTO {
     private Date issueDate;
     private Boolean isReturned;
     private Date returnDate;
+    private Date dueDate;
+    private int fine;
 }

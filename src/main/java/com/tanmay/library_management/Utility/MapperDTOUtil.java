@@ -76,6 +76,8 @@ public class MapperDTOUtil {
         issuedBooksDTO.setIssueDate(booksIssued.getIssueDate());
         issuedBooksDTO.setReturnDate(booksIssued.getReturnDate());
         issuedBooksDTO.setIsReturned(booksIssued.getIsReturned());
+        issuedBooksDTO.setDueDate(booksIssued.getDueDate());
+        issuedBooksDTO.setFine(booksIssued.getFine());
         return issuedBooksDTO;
     }
 }

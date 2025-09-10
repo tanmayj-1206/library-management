@@ -33,6 +33,8 @@ public class BooksIssued {
     private Book book;
 
     private Date issueDate;
+    private Date dueDate;
+    private int fine;
     private Date returnDate;
     private Boolean isReturned = false;
 }
