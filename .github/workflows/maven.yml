@@ -19,6 +19,19 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: example
+          MYSQL_DATABASE: library_db
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pexample"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 21
