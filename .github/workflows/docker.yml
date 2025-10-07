@@ -9,6 +9,8 @@
 name: Java CI with Maven
 
 on:
+  pull_request:
+    branches: [ "main" ]
   push:
     branches: [ "main" ]
 
@@ -35,5 +37,7 @@ jobs:
       uses: docker/build-push-action@v6.18.0
       with:
         context: .
+        file: ./Dockerfile
         tags: ${{vars.DOCKER_USERNAME}}/library-management:latest
         push: true
+        
